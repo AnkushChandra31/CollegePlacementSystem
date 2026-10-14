@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """Basic Tkinter user interface for the College Placement System."""
 
 import smtplib
@@ -168,3 +169,6 @@ if __name__ == "__main__":
     root = tk.Tk()
     PlacementApp(root)
     root.mainloop()
+=======
+#Tkinter interface
+>>>>>>> aee2bce018ef6f7373df0dfc38b4cae6b5a6113e
