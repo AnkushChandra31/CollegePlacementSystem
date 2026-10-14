@@ -1,0 +1,24 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment files and email credentials
+.env
+.env.*
+*.key
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+htmlcov/

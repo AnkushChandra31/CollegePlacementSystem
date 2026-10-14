@@ -1,5 +1,6 @@
 """Basic Tkinter user interface for the College Placement System."""
 
+import os
 import smtplib
 import tkinter as tk
 from tkinter import messagebox, ttk
@@ -90,9 +91,11 @@ class PlacementApp:
         email_frame.pack(fill="x", pady=(10, 0))
         ttk.Label(email_frame, text="Your Gmail").grid(row=0, column=0, padx=(0, 5))
         self.sender_email = ttk.Entry(email_frame, width=32)
+        self.sender_email.insert(0, os.getenv("PLACEMENT_SENDER_EMAIL", ""))
         self.sender_email.grid(row=0, column=1, padx=(0, 12))
         ttk.Label(email_frame, text="Gmail App Password").grid(row=0, column=2, padx=(0, 5))
         self.app_password = ttk.Entry(email_frame, width=22, show="*")
+        self.app_password.insert(0, os.getenv("PLACEMENT_EMAIL_APP_PASSWORD", ""))
         self.app_password.grid(row=0, column=3, padx=(0, 12))
         ttk.Button(email_frame, text="Send Emails", command=self.send_shortlist_emails).grid(row=0, column=4)
         ttk.Button(email_frame, text="Clear Results", command=self.clear_results).grid(row=0, column=5, padx=(8, 0))
