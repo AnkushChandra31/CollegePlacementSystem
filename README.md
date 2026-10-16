@@ -21,6 +21,12 @@ A basic Python desktop application for maintaining student information, checking
 Open a terminal in the project folder and run:
 
 ```powershell
+python gui.py
+```
+
+This opens the desktop interface. To use the basic terminal version, run:
+
+```powershell
 python main.py
 ```
 
