@@ -1,4 +1,3 @@
-"""Core placement-system logic shared by the interface."""
 
 from data_structures import LinkedList, PriorityQueue, Queue
 from student import Student

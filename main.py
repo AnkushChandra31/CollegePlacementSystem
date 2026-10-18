@@ -1,11 +1,9 @@
-"""Run the College Placement System in terminal mode."""
 
 from company import Company
 from placement_system import PlacementSystem
 
 
 def read_student(system):
-    """Read and save one student from the terminal."""
     try:
         student_id = int(input("Student ID: "))
         name = input("Name: ").strip()
