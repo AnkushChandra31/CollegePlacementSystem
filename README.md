@@ -1,12 +1,13 @@
 # College Placement System
 
-A basic Python desktop application for maintaining student information, checking company eligibility criteria, ranking shortlisted students by CGPA, and sending shortlist emails.
+A basic Python application that stores student records in an SQLite database, checks company eligibility criteria, ranks shortlisted students by CGPA, and sends shortlist emails.
 
 ## Features
 
-- Add student details: ID, name, email, CGPA, backlogs, branch, and skills.
-- Set company eligibility criteria: company, job role, minimum CGPA, maximum backlogs, branch, and required skills.
-- Shortlist eligible students and rank them by CGPA.
+- Save student details: ID, name, email, CGPA, backlogs, branch, and skills in SQLite.
+- Add starter student records automatically when they are missing.
+- Enter company criteria separately after student records already exist.
+- Shortlist eligible students from the stored database records and rank them by CGPA.
 - Send shortlist email notifications to selected students using Gmail SMTP.
 - Prevent duplicate student IDs and invalid CGPA/backlog values.
 
@@ -24,19 +25,15 @@ Open a terminal in the project folder and run:
 python gui.py
 ```
 
-This opens the desktop interface. To use the basic terminal version, run:
-
-```powershell
-python main.py
-```
+This opens the desktop interface. You can also start the same GUI with `python main.py`.
 
 ## How to Use
 
-1. Open the **Student and Company** tab.
-2. Enter the student details and click **Add Student**. Add as many students as needed.
-3. Set the company criteria.
-4. Click **Shortlist Students**.
-5. Open the **Shortlist and Email** tab to view eligible students.
+1. Open the **Student Database** tab.
+2. Enter the student details and click **Save Student**. These details remain stored after closing the application.
+3. Open the **Company Criteria** tab after student records are stored.
+4. Enter company requirements and click **Shortlist Stored Students**.
+5. Open the **Shortlist Results** tab to view eligible students.
 6. To email the shortlisted students, enter the sender Gmail address and Gmail App Password, then click **Send Emails**.
 
 ## Email Setup
@@ -67,6 +64,7 @@ Close and reopen the terminal/application after running these commands. The emai
 | `main.py` | Starts the desktop application. |
 | `gui.py` | Tkinter interface, validation, shortlisting display, and email controls. |
 | `placement_system.py` | Student storage and shortlisting workflow. |
+| `database.py` | SQLite database creation and saved student records. |
 | `student.py` | Student data model. |
 | `company.py` | Company eligibility rules. |
 | `data_structures.py` | Linked list, queue, and priority queue implementations. |

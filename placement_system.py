@@ -1,18 +1,17 @@
+"""Placement workflow using stored student records from SQLite."""
 
-from data_structures import LinkedList, PriorityQueue, Queue
+from data_structures import PriorityQueue, Queue
+from database import PlacementDatabase
 from student import Student
 
 
 class PlacementSystem:
-    def __init__(self):
-        self.students = LinkedList()
-        self.student_ids = set()
+    def __init__(self, database_path="placement_system.db"):
+        self.database = PlacementDatabase(database_path)
 
     def add_student(self, student_id, name, email, cgpa, backlogs, branch, skills):
         if student_id <= 0:
             raise ValueError("Student ID must be a positive number.")
-        if student_id in self.student_ids:
-            raise ValueError("A student with this ID already exists.")
         if not name.strip() or not email.strip() or not branch.strip() or not skills:
             raise ValueError("Name, email, branch, and at least one skill are required.")
         if not 0 <= cgpa <= 10:
@@ -21,18 +20,21 @@ class PlacementSystem:
             raise ValueError("Backlogs cannot be negative.")
 
         student = Student(student_id, name, email, cgpa, backlogs, branch, skills)
-        self.students.insert(student)
-        self.student_ids.add(student_id)
+        self.database.add_student(student)
         return student
 
-    def shortlist(self, company):
+    def get_students(self):
+        return self.database.get_students()
+
+    def shortlist(self, company, save_criteria=True):
+        """Shortlist students already saved in the database."""
+        if save_criteria:
+            self.database.add_company_criteria(company)
         applications = Queue()
         ranking = PriorityQueue()
-        current = self.students.head
 
-        while current is not None:
-            applications.enqueue(current.data)
-            current = current.next
+        for student in self.get_students():
+            applications.enqueue(student)
 
         while not applications.is_empty():
             student = applications.dequeue()
@@ -43,3 +45,7 @@ class PlacementSystem:
         while not ranking.is_empty():
             selected_students.append(ranking.remove())
         return selected_students
+
+    def preview_shortlist(self, company):
+        """Check matches without saving temporary criteria to the database."""
+        return self.shortlist(company, save_criteria=False)
